@@ -19,7 +19,7 @@ export const routes: Routes = [
             },
           
             {
-                path:'user/:id',
+                path:'user',
                 
                 loadComponent: () =>  import('./dashboard/pages/user/user.component')
             },
@@ -29,21 +29,27 @@ export const routes: Routes = [
                 loadComponent: () =>  import('./dashboard/pages/users/users.component')
             },
             
+            
             {
                 path: '',
                 redirectTo:'home',
                  pathMatch: 'full',  
-            }
+            },
+            {
+                path:'eps-create',
+                loadComponent: () =>  import('./dashboard/pages/eps-create/eps-create.component')
+            },
             
         ]
     },
+   
     {
         path: "login",
         loadComponent:() => import('./auth/login/login.component')
     },
 {
     path: '',
-   redirectTo:'/dashboard',
+    redirectTo:'/dashboard',
     pathMatch: 'full'
 }
 
