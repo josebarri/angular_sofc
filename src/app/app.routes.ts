@@ -9,12 +9,10 @@ export const routes: Routes = [
         children:[
             {
                 path:'home',
-               
                 loadComponent: () =>  import('./dashboard/pages/control-flow/control-flow.component')
             },
             {
                 path:'estudiantes',
-                
                 loadComponent: () =>  import('./dashboard/pages/defer-options/defer-options.component')
             },
           
@@ -27,6 +25,11 @@ export const routes: Routes = [
                 path:'user-list',
                
                 loadComponent: () =>  import('./dashboard/pages/users/users.component')
+            },
+            {
+                path:'eps/:id',
+               
+                loadComponent: () =>  import('./dashboard/pages/edit-eps/edit-eps.component')
             },
             
             
@@ -43,10 +46,10 @@ export const routes: Routes = [
         ]
     },
    
-    {
-        path: "login",
-        loadComponent:() => import('./auth/login/login.component')
-    },
+    // {
+    //     path: "login",
+    //     loadComponent:() => import('./auth/login/login.component')
+    // },
 {
     path: '',
     redirectTo:'/dashboard',

@@ -13,7 +13,8 @@ import swal from "sweetalert2";
   styleUrl: './defer-options.component.css'
 })
 export default class DeferOptionsComponent implements OnInit {
-  constructor(private dashboardService:DashboardService, private router: Router) { }
+  constructor(
+    private dashboardService:DashboardService, private router: Router) { }
   puntos: any[] = [];
 
   
@@ -25,23 +26,49 @@ crear(){
   this.router.navigate(['dashboard/eps-create'])
 }
 
+editEps(ideps: any) {
+  this.router.navigate(["dashboard/eps", ideps]);
+  
+}
 
-alert(){
+deleteEps(idEps:any){
+  let payload={
+   
+      id_eps: idEps
+   
+  }
   swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
+    title: "Alerta",
+    text: "¿confirma que quiere eliminar eps?!",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete it!"
+    confirmButtonText: "Aceptar!"
   }).then((result) => {
     if (result.isConfirmed) {
-      swal.fire({
-        title: "Deleted!",
-        text: "Your file has been deleted.",
-        icon: "success"
-      });
+      this.dashboardService.storePoint(payload).subscribe((resp)=>{
+        if(resp.code == 200){
+          this.getEps()
+          swal.fire({
+            title: "Deleted!",
+            text: resp.message,
+            icon: "success"
+          });
+          
+        }else{
+          swal.fire({
+            title: "Error",
+            text: resp.message,
+            icon: "error",
+            customClass: {
+              confirmButton: "btn btn-success",
+            },
+            buttonsStyling: false,
+          });
+        }
+      })
+      
     }
   });
 }

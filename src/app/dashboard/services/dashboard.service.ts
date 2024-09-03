@@ -18,6 +18,15 @@ private headers: HttpHeaders = new HttpHeaders({ Authorization: this.token });
    getEpss(): Observable<any> {
     return this.http.get<any>(`${this.url}eps/epsAll`).pipe(res=>res);
   }
+  storePoint(formData: any): Observable<any> {
+    return this.http.post<any>(`${this.url}eps/delete`, formData).pipe(res=>res);
+  }
+  InsertEps(formData: any): Observable<any> {
+    return this.http.post<any>(`${this.url}eps/saveEps`, formData).pipe(res=>res);
+  }
+  EpsById(formData: any): Observable<any> {
+    return this.http.post<any>(`${this.url}eps/findById`, formData).pipe(res=>res);
+  }
 
 
 

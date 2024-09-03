@@ -1,10 +1,10 @@
 <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8">
-    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Crear Eps</h2>
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Actualizar Eps</h2>
     <!-- [formGroup]="form" -->
     <form [formGroup]="form" (ngSubmit)="sendForm()" >
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="cedula">Code Eps</label>
-        <input formControlName="id_eps" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="cedula" type="text" placeholder="codigo eps">
+        <input readonly formControlName="id_eps" class=" cursor-not-allowed shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="cedula" type="text" placeholder="codigo eps">
         <div *ngIf="form.get('id_eps')?.hasError('required')" class="text-red-700">
                       El codigo de la eps es requerido
         </div>
@@ -28,7 +28,7 @@
   
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="correo">Fecha</label>
-        <input formControlName="fecha" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="text" type="date" placeholder="Ingrese la fecha">
+        <input formControlName="fecha" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="text" type="text" placeholder="Ingrese la fecha">
       <div *ngIf="form.get('fecha')?.hasError('required')" class="text-red-700">
                       El fecha de la eps es requerido
         </div>
