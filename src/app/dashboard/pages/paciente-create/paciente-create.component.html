@@ -1,0 +1,25 @@
+<div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Registrar paciente</h2>
+    <form [formGroup]="form" (ngSubmit)="sendForm()">
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="id_mascota">Mascota</label>
+        <select formControlName="id_mascota" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="id_mascota">
+          <option value="">Seleccione una mascota</option>
+          <option *ngFor="let mascota of mascotas" [value]="mascota.id_mascota">{{mascota.nombre_mascota+' raza: '+ mascota.raza}}</option>
+        </select>
+        <div *ngIf="form.get('id_mascota')?.hasError('required')" class="text-red-700 mt-1">
+          Debes seleccionar una mascota
+        </div>
+      </div>
+  
+      <div class="flex items-center justify-end p-2">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+          Guardar
+        </button>
+        <button (click)="cancelar()" class="bg-red-800 hover:bg-red-500 ml-2 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+  

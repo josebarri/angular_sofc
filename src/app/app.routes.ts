@@ -15,6 +15,18 @@ export const routes: Routes = [
                 path:'mascotas',
                 loadComponent: () =>  import('./dashboard/pages/defer-options/defer-options.component')
             },
+            {
+                path:'pacientes',
+                loadComponent: () =>  import('./dashboard/pages/pacientes/pacientes.component')
+            },
+            {
+                path:'paciente-create',
+                loadComponent: () =>  import('./dashboard/pages/paciente-create/paciente-create.component')
+            },
+            {
+                path:'paciente/:id',
+                loadComponent: () =>  import('./dashboard/pages/edit-paciente/edit-paciente.component')
+            },
           
             {
                 path:'user',

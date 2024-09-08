@@ -1,0 +1,38 @@
+<button (click)="crear()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 ease-in-out">
+    Registrar
+  </button>
+  
+  <div class="shadow-lg rounded-lg overflow-hidden mt-4 mx-4 md:mx-10">
+    <div class="overflow-x-auto">
+      <div class="max-h-[500px] overflow-y-auto"> <!-- Ajusta la altura según tus necesidades -->
+        <table class="w-full table-fixed">
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="w-1/6 py-4 px-6 text-center text-gray-600 font-bold uppercase">Nombre Mascota</th>
+              <th class="w-1/6 py-4 px-6 text-center text-gray-600 font-bold uppercase">fecha Nacimiento</th>
+              <th class="w-1/6 py-4 px-6 text-center text-gray-600 font-bold uppercase">Raza</th>
+              <th class="w-1/6 py-4 px-6 text-center text-gray-600 font-bold uppercase">Dueño</th>
+              <th class="w-1/6 py-4 px-6 text-center text-gray-600 font-bold uppercase">identificacion</th>
+              <th class="w-1/6 py-4 px-6 text-center text-gray-600 font-bold uppercase">Fecha Registro</th>
+              <th class="w-1/6 py-4 px-6 text-center text-gray-600 font-bold uppercase">Opción</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white">
+            <tr *ngFor="let item of puntos; let i = index">
+                <td class="py-4 px-6 border-b border-gray-200 text-center">{{ item.mascotaDto.nombre_mascota }}</td>
+                <td class="py-4 px-6 border-b border-gray-200 text-center">{{ item.mascotaDto.fnac_mascota }}</td>
+                <td class="py-4 px-6 border-b border-gray-200 text-center">{{ item.mascotaDto.raza}}</td>
+              <td class="py-4 px-6 border-b border-gray-200 text-center">{{ item.mascotaDto.duenoDto['nombreDueño']}}</td>
+              <td class="py-4 px-6 border-b border-gray-200 text-center">{{ item.mascotaDto.duenoDto.num_identificacion }}</td>
+              <td class="py-4 px-6 border-b border-gray-200 text-center">{{ item.fechaRegistro }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-center">
+                <button class="ml-2 px-3 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 active:bg-red-700 transition duration-150 ease-in-out" (click)="deleteEps(item.idPaciente)">
+                  <span class="text-lg">🗑️</span> 
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
