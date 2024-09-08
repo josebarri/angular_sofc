@@ -42,7 +42,7 @@ export default class EditEpsComponent implements OnInit{
       id_eps:this.ideps
 
     }
-      this.dashboardService.EpsById(payload).subscribe(data => {
+      this.dashboardService.mascotaId(this.ideps).subscribe(data => {
        console.log(data.data);
        this.form.patchValue({
         id_eps: data.data.id_eps,
@@ -60,7 +60,7 @@ export default class EditEpsComponent implements OnInit{
       return;
     } else {
      let EpsSend: any = this.form.getRawValue();
-     this.dashboardService.InsertEps(EpsSend).subscribe((resp) => {
+     this.dashboardService.posMascotas(EpsSend).subscribe((resp) => {
       if (resp.code == 200) {
         swal.fire({
           title: "Confirmación.",

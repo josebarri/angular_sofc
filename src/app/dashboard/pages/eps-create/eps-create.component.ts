@@ -23,7 +23,7 @@ export default class EpsCreateComponent implements OnInit{
     fecha: '',
     telefono: '',
   }
-  
+  puntos: any[] = [];
   nombre: string = "";
   idbasemusical!: string;
   form!: FormGroup;
@@ -36,12 +36,13 @@ constructor(
   
 }
   ngOnInit(): void {
+    this.getDueños()
     this.form = this._formBuilder.group({
-      id_eps: [null, [Validators.required]],
       nombre: [null, [Validators.required]],
-      direccion: [null, [Validators.required]],
-      fecha:[null, [Validators.required]],
-      telefono:[null, [Validators.required]],
+      raza: [null, [Validators.required]],
+      especie: [null, [Validators.required]],
+      fnac_mascota:[null, [Validators.required]],
+      id_Dueño:['', [Validators.required]],
       
       
     });
@@ -51,6 +52,13 @@ constructor(
 
 
   }
+  getDueños(){
+    this.dashboardService.getDueno().subscribe((resp) => {
+      this.puntos= resp.data;
+    console.log('dueños', this.puntos);
+    
+    });
+  }
   cancelar(){
     this.router.navigate(['dashboard/estudiantes'])
   }
@@ -59,8 +67,18 @@ constructor(
       this.form.markAllAsTouched();
       return;
     } else {
-     let EpsSend: any = this.form.getRawValue();
-     this.dashboardService.InsertEps(EpsSend).subscribe((resp) => {
+     let EpsSend = this.form.getRawValue();
+     let payload ={  
+      nombre_mascota: EpsSend.nombre,
+      raza: EpsSend.raza,
+      especie:EpsSend.especie,
+      fnac_mascota: EpsSend.fnac_mascota,
+      duenoDto: {
+         id_Dueño: EpsSend.id_Dueño,
+       }
+
+     }
+     this.dashboardService.posMascotas(payload).subscribe((resp) => {
       if (resp.code == 200) {
         swal.fire({
           title: "Confirmación.",

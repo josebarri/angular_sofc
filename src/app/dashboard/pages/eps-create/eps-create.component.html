@@ -1,54 +1,58 @@
 <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8">
-    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Crear Eps</h2>
-    <!-- [formGroup]="form" -->
-    <form [formGroup]="form" (ngSubmit)="sendForm()" >
+  <h2 class="text-2xl font-semibold text-gray-800 mb-6">Registrar Mascota</h2>
+  <form [formGroup]="form" (ngSubmit)="sendForm()">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="cedula">Code Eps</label>
-        <input formControlName="id_eps" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="cedula" type="text" placeholder="codigo eps">
-        <div *ngIf="form.get('id_eps')?.hasError('required')" class="text-red-700">
-                      El codigo de la eps es requerido
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="nombre">Nombre Mascota</label>
+        <input formControlName="nombre" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nombre" type="text" placeholder="Ingrese el nombre de la mascota">
+        <div *ngIf="form.get('nombre')?.hasError('required')" class="text-red-700 mt-1">
+          El nombre es requerido
         </div>
       </div>
-  
+
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="nombre">Nombre</label>
-        <input formControlName="nombre"  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nombre" type="text" placeholder="Ingrese el nombre de la eps">
-    <div *ngIf="form.get('nombre')?.hasError('required')" class="text-red-700">
-                      El nombre de la eps es requerido
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="raza">Raza</label>
+        <input formControlName="raza" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="raza" type="text" placeholder="Ingrese la raza">
+        <div *ngIf="form.get('raza')?.hasError('required')" class="text-red-700 mt-1">
+          La raza es requerida
         </div>
       </div>
-  
+
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="telefono">Direccion</label>
-        <input formControlName="direccion" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="telefono" type="text" placeholder="direccion">
-      <div *ngIf="form.get('direccion')?.hasError('required')" class="text-red-700">
-                      El direccion de la eps es requerido
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="especie">Especie</label>
+        <input formControlName="especie" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="especie" type="text" placeholder="Ingrese la especie">
+        <div *ngIf="form.get('especie')?.hasError('required')" class="text-red-700 mt-1">
+          La especie es requerida
         </div>
       </div>
-  
+
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="correo">Fecha</label>
-        <input formControlName="fecha" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="text" type="date" placeholder="Ingrese la fecha">
-      <div *ngIf="form.get('fecha')?.hasError('required')" class="text-red-700">
-                      El fecha de la eps es requerido
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="fnac_mascota">Fecha Nacimiento</label>
+        <input formControlName="fnac_mascota" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="fnac_mascota" type="date" placeholder="Ingrese la fecha de nacimiento">
+        <div *ngIf="form.get('fnac_mascota')?.hasError('required')" class="text-red-700 mt-1">
+          La fecha de nacimiento es requerida
         </div>
       </div>
-  
+
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="placa">Telefono</label>
-        <input formControlName="telefono" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="placa" type="text" placeholder="Ingrese el telefono">
-      <div *ngIf="form.get('telefono')?.hasError('required')" class="text-red-700">
-                      El telefono de la eps es requerido
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="id_Dueño">Dueño</label>
+        <select formControlName="id_Dueño" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="id_Dueño">
+          <option value="">Seleccione un dueño</option>
+          <option *ngFor="let item of puntos" [value]="item['id_Dueño']">{{item['nombreDueño']+ '-' +item['apellidoDueño']}}</option>
+        </select>
+        <div *ngIf="form.get('id_Dueño')?.hasError('required')" class="text-red-700 mt-1">
+          El dueño es requerido
         </div>
       </div>
-  
-      <div class="flex items-center justify-end  p-2">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-          Guardar
-        </button>
-        <button (click)="cancelar()" class="bg-red-800 hover:bg-red-500 ml-2 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" >
-            cancelar
-          </button>
-      </div>
-    </form>
-  </div>
+    </div>
+
+    <div class="flex items-center justify-end p-2">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+        Guardar
+      </button>
+      <button (click)="cancelar()" class="bg-red-800 hover:bg-red-500 ml-2 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

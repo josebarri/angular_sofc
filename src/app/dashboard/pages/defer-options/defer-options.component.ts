@@ -19,7 +19,7 @@ export default class DeferOptionsComponent implements OnInit {
 
   
   ngOnInit(): void {
-   this.getEps()
+   this.getMascotas()
   }
 
 crear(){
@@ -32,14 +32,10 @@ editEps(ideps: any) {
 }
 
 deleteEps(idEps:any){
-  let payload={
-   
-      id_eps: idEps
-   
-  }
+  
   swal.fire({
     title: "Alerta",
-    text: "¿confirma que quiere eliminar eps?!",
+    text: "¿confirma que quiere eliminar la mascota?!",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
@@ -47,9 +43,9 @@ deleteEps(idEps:any){
     confirmButtonText: "Aceptar!"
   }).then((result) => {
     if (result.isConfirmed) {
-      this.dashboardService.storePoint(payload).subscribe((resp)=>{
+      this.dashboardService.deleteMascota(idEps).subscribe((resp)=>{
         if(resp.code == 200){
-          this.getEps()
+          this.getMascotas()
           swal.fire({
             title: "Deleted!",
             text: resp.message,
@@ -73,10 +69,10 @@ deleteEps(idEps:any){
   });
 }
 
-  getEps(){
-    this.dashboardService.getEpss().subscribe((resp) => {
+  getMascotas(){
+    this.dashboardService.getMascotas().subscribe((resp) => {
       this.puntos= resp.data;
-    console.log('mis eps', this.puntos);
+    console.log('mis mascotas', this.puntos);
     
     });
   }

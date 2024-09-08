@@ -1,31 +1,39 @@
-<button (click)="crear()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline" type="submit">
+<button (click)="crear()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 ease-in-out">
     Registrar
   </button>
-<div class="shadow-lg rounded-lg overflow-hidden mt-4 mx-4 md:mx-10">
-    <table class="w-full table-fixed">
-        <thead>
-            <tr class="bg-gray-100">
-                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">code_EPs</th>
-                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Nombre</th>
-                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Direccion</th>
-                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Fecha_Creacion</th>
-                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Telefono</th>
-                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Opcion</th>
+  
+  <div class="shadow-lg rounded-lg overflow-hidden mt-4 mx-4 md:mx-10">
+    <div class="overflow-x-auto">
+      <div class="max-h-[500px] overflow-y-auto"> <!-- Ajusta la altura según tus necesidades -->
+        <table class="w-full table-fixed">
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="w-1/6 py-4 px-6 text-center text-gray-600 font-bold uppercase">Nombre</th>
+              <th class="w-1/6 py-4 px-6 text-center text-gray-600 font-bold uppercase">Raza</th>
+              <th class="w-1/6 py-4 px-6 text-center text-gray-600 font-bold uppercase">Especie</th>
+              <th class="w-1/6 py-4 px-6 text-center text-gray-600 font-bold uppercase">Fecha_nacimiento</th>
+              <th class="w-1/6 py-4 px-6 text-center text-gray-600 font-bold uppercase">Dueño</th>
+              <th class="w-1/6 py-4 px-6 text-center text-gray-600 font-bold uppercase">Opción</th>
             </tr>
-        </thead>
-        <tbody class="bg-white">
+          </thead>
+          <tbody class="bg-white">
             <tr *ngFor="let item of puntos; let i = index">
-                <td class="py-4 px-6 border-b border-gray-200">{{ item.id_eps }}</td>
-                <td class="py-4 px-6 border-b border-gray-200">{{ item.nombre }}</td>
-                <td class="py-4 px-6 border-b border-gray-200">{{ item.direccion }}</td>
-                <td class="py-4 px-6 border-b border-gray-200">{{ item.fecha }}</td>
-                <td class="py-4 px-6 border-b border-gray-200">{{ item.telefono }}</td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <button class="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out" (click)="editEps(item.id_eps)" >Edit</button>
-                    <button class="ml-2 px-3 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out" (click)="deleteEps(item.id_eps)"  >Delete</button>
-                </td>
-
+              <td class="py-4 px-6 border-b border-gray-200 text-center">{{ item.nombre_mascota }}</td>
+              <td class="py-4 px-6 border-b border-gray-200 text-center">{{ item.raza }}</td>
+              <td class="py-4 px-6 border-b border-gray-200 text-center">{{ item.especie }}</td>
+              <td class="py-4 px-6 border-b border-gray-200 text-center">{{ item.fnac_mascota }}</td>
+              <td class="py-4 px-6 border-b border-gray-200 text-center">{{ item.duenoDto['nombreDueño'] }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-center">
+                <button class="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 active:bg-blue-700 transition duration-150 ease-in-out" (click)="editEps(item.id_mascota)">
+                  <span class="text-lg">✎</span> 
+                </button>
+                <button class="ml-2 px-3 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 active:bg-red-700 transition duration-150 ease-in-out" (click)="deleteEps(item.id_mascota)">
+                  <span class="text-lg">🗑️</span> 
+                </button>
+              </td>
             </tr>
-        </tbody>
-    </table>
-</div>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
