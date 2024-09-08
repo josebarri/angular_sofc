@@ -17,39 +17,44 @@ import swal from "sweetalert2";
 export default class EditEpsComponent implements OnInit{
   ideps: string='';
   form!: FormGroup;
+  puntos: any[] = [];
   constructor(
     private dashboardService:DashboardService, private route: ActivatedRoute, public router: Router,
     private _formBuilder: FormBuilder
   ){
     this.form = this._formBuilder.group({
-      id_eps: [null, [Validators.required]],
       nombre: [null, [Validators.required]],
-      direccion: [null, [Validators.required]],
-      fecha:[null, [Validators.required]],
-      telefono:[null, [Validators.required]],
+      raza: [null, [Validators.required]],
+      especie: [null, [Validators.required]],
+      fnac_mascota:[null, [Validators.required]],
+      id_Dueño:[null, [Validators.required]],
     });
   }
   
   ngOnInit(): void {
      this.ideps = this.route.snapshot.paramMap.get("id")!;
-     console.log('este moises gay', this.ideps);
      this.EpsById()
+     this.getDueños()
+     
     
 
   }
+  getDueños(){
+    this.dashboardService.getDueno().subscribe((resp) => {
+      this.puntos= resp.data;
+    console.log('dueños', this.puntos);
+    
+    });
+  }
   EpsById(): void {
-    let payload={
-      id_eps:this.ideps
-
-    }
       this.dashboardService.mascotaId(this.ideps).subscribe(data => {
-       console.log(data.data);
+       console.log(data);
        this.form.patchValue({
-        id_eps: data.data.id_eps,
-        nombre: data.data.nombre,
-        direccion: data.data.direccion,
-        fecha: data.data.fecha,
-        telefono: data.data.telefono
+        nombre: data.data.nombre_mascota,
+        raza: data.data.raza,
+        especie: data.data.especie,
+        fnac_mascota: data.data.fnac_mascota,
+        id_Dueño: data.data.duenoDto.id_Dueño
       });
       });
 
@@ -59,19 +64,29 @@ export default class EditEpsComponent implements OnInit{
       this.form.markAllAsTouched();
       return;
     } else {
-     let EpsSend: any = this.form.getRawValue();
-     this.dashboardService.posMascotas(EpsSend).subscribe((resp) => {
+      let EpsSend = this.form.getRawValue();
+      let payload ={ 
+        id_mascota:this.ideps, 
+       nombre_mascota: EpsSend.nombre,
+       raza: EpsSend.raza,
+       especie:EpsSend.especie,
+       fnac_mascota: EpsSend.fnac_mascota,
+       duenoDto: {
+          id_Dueño: EpsSend.id_Dueño,
+        }
+      }
+     this.dashboardService.posMascotas(payload).subscribe((resp) => {
       if (resp.code == 200) {
         swal.fire({
           title: "Confirmación.",
-          text: "La Eps fue actualizada de manera correcta!",
+          text: "La mascota fue actualizada de manera correcta!",
           buttonsStyling: false,
           customClass: {
             confirmButton: "btn btn-success",
           },
           icon: "success",
         });
-        this.router.navigate(["dashboard/estudiantes"]);
+        this.router.navigate(["dashboard/mascotas"]);
       } else {
         swal.fire({
           title: "Error.",
@@ -87,7 +102,7 @@ export default class EditEpsComponent implements OnInit{
   }
 }
   cancelar(){
-    this.router.navigate(['dashboard/estudiantes'])
+    this.router.navigate(['dashboard/mascotas'])
   }
  
 }

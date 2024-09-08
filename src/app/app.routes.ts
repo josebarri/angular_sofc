@@ -12,7 +12,7 @@ export const routes: Routes = [
                 loadComponent: () =>  import('./dashboard/pages/control-flow/control-flow.component')
             },
             {
-                path:'estudiantes',
+                path:'mascotas',
                 loadComponent: () =>  import('./dashboard/pages/defer-options/defer-options.component')
             },
           
@@ -22,12 +22,17 @@ export const routes: Routes = [
                 loadComponent: () =>  import('./dashboard/pages/user/user.component')
             },
             {
-                path:'user-list',
+                path:'user-create',
                
                 loadComponent: () =>  import('./dashboard/pages/users/users.component')
             },
             {
-                path:'eps/:id',
+                path:'user/:id',
+               
+                loadComponent: () =>  import('./dashboard/pages/edit-user/edit-user.component')
+            },
+            {
+                path:'mascotas/:id',
                
                 loadComponent: () =>  import('./dashboard/pages/edit-eps/edit-eps.component')
             },
@@ -39,7 +44,7 @@ export const routes: Routes = [
                  pathMatch: 'full',  
             },
             {
-                path:'eps-create',
+                path:'mascotas-create',
                 loadComponent: () =>  import('./dashboard/pages/eps-create/eps-create.component')
             },
             

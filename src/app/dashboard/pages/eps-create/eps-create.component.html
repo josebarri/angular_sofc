@@ -37,7 +37,7 @@
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="id_Dueño">Dueño</label>
         <select formControlName="id_Dueño" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="id_Dueño">
-          <option value="">Seleccione un dueño</option>
+          <option value="">Seleccione el propietario</option>
           <option *ngFor="let item of puntos" [value]="item['id_Dueño']">{{item['nombreDueño']+ '-' +item['apellidoDueño']}}</option>
         </select>
         <div *ngIf="form.get('id_Dueño')?.hasError('required')" class="text-red-700 mt-1">

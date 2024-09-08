@@ -23,11 +23,11 @@ export default class DeferOptionsComponent implements OnInit {
   }
 
 crear(){
-  this.router.navigate(['dashboard/eps-create'])
+  this.router.navigate(['dashboard/mascotas-create'])
 }
 
 editEps(ideps: any) {
-  this.router.navigate(["dashboard/eps", ideps]);
+  this.router.navigate(["dashboard/mascotas", ideps]);
   
 }
 

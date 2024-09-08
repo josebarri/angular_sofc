@@ -60,7 +60,7 @@ constructor(
     });
   }
   cancelar(){
-    this.router.navigate(['dashboard/estudiantes'])
+    this.router.navigate(['dashboard/mascotas'])
   }
   sendForm(){
     if (this.form.invalid) {
@@ -82,14 +82,14 @@ constructor(
       if (resp.code == 200) {
         swal.fire({
           title: "Confirmación.",
-          text: "La Eps fue registrada de manera correcta!",
+          text: "La mascota fue registrada de manera correcta!",
           buttonsStyling: false,
           customClass: {
             confirmButton: "btn btn-success",
           },
           icon: "success",
         });
-        this.router.navigate(["dashboard/estudiantes"]);
+        this.router.navigate(["dashboard/mascotas"]);
       } else {
         swal.fire({
           title: "Error.",
