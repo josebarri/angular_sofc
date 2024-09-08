@@ -94,8 +94,8 @@ export default class LoginComponent {
 
     this.auth.login(this.email, this.password).subscribe(resp => {
       console.log('Response:', resp);
-      if (resp && resp.token) {
-        localStorage.setItem("token", resp.token);
+      if (resp && resp.data) {
+        localStorage.setItem("token", resp.data);
         this.router.navigate(['/dashboard']);
       } else {
         this.loginError = true;

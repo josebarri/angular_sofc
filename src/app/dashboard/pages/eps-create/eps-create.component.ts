@@ -15,14 +15,6 @@ import swal from "sweetalert2";
   styleUrl: './eps-create.component.css'
 })
 export default class EpsCreateComponent implements OnInit{
-
-  public EpsSend: any = {
-    id_eps: '',
-    nombre: '',
-    direccion: '',
-    fecha: '',
-    telefono: '',
-  }
   puntos: any[] = [];
   nombre: string = "";
   idbasemusical!: string;

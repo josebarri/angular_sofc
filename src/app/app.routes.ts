@@ -63,13 +63,13 @@ export const routes: Routes = [
         ]
     },
    
-    // {
-    //     path: "login",
-    //     loadComponent:() => import('./auth/login/login.component')
-    // },
+     {
+         path: "login",
+        loadComponent:() => import('./auth/login/login.component')
+     },
 {
     path: '',
-    redirectTo:'/dashboard',
+    redirectTo:'/login',
     pathMatch: 'full'
 }
 

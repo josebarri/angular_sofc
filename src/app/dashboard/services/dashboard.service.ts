@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DashboardService {
+  private urlExportar: string= 'http://localhost:1020/mascota/exportar-excel';
 private urlMascota: string = 'http://localhost:1020/mascota';
 private urlDueño: string = 'http://localhost:1020/dueno';
 private urlPaciente: string = 'http://localhost:1020/paciente';
@@ -31,6 +32,9 @@ private headers: HttpHeaders = new HttpHeaders({ Authorization: this.token });
   }
   mascotaId(id: any): Observable<any> {
     return this.http.get<any>(`${this.urlMascota}/${id}`).pipe(res=>res);
+  }
+  getExportarMascotas(): Observable<any> {
+    return this.http.get<any>(`${this.urlExportar}`).pipe(res=>res);
   }
 
 

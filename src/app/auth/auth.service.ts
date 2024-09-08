@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
 
-  private url: string = 'http://localhost:8080/auth/';
+  private url: string = 'http://localhost:1020/auth';
   constructor(private http: HttpClient) {
 
 }
@@ -16,11 +16,11 @@ export class AuthService {
 login(correo: string, password: string)
   {
     let data = {
-      "username":correo,
+      "correo":correo,
       "password":password
     };
 
-    return this.http.post<any>(`${this.url}login`,data);
+    return this.http.post<any>(`${this.url}`,data);
     
      
   }

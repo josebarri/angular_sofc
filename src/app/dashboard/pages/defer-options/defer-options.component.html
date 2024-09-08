@@ -1,7 +1,11 @@
 <button (click)="crear()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 ease-in-out">
     Registrar
   </button>
-  
+  <div class="flex justify-end mt-4 mx-4 md:mx-10">
+    <button (click)="getMascotasExport()" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200 ease-in-out">
+      Exportar
+    </button>
+  </div>
   <div class="shadow-lg rounded-lg overflow-hidden mt-4 mx-4 md:mx-10">
     <div class="overflow-x-auto">
       <div class="max-h-[500px] overflow-y-auto"> <!-- Ajusta la altura según tus necesidades -->

@@ -72,7 +72,12 @@ deleteEps(idEps:any){
   getMascotas(){
     this.dashboardService.getMascotas().subscribe((resp) => {
       this.puntos= resp.data;
-    console.log('mis mascotas', this.puntos);
+    });
+  }
+  getMascotasExport(){
+    this.dashboardService.getExportarMascotas().subscribe((resp) => {
+       resp;
+    console.log('mi esportar', resp);
     
     });
   }
