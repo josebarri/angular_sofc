@@ -74,11 +74,16 @@ deleteEps(idEps:any){
       this.puntos= resp.data;
     });
   }
-  getMascotasExport(){
-    this.dashboardService.getExportarMascotas().subscribe((resp) => {
-       resp;
-    console.log('mi esportar', resp);
-    
+  getMascotasExport() {
+    this.dashboardService.getExportarMascotas().subscribe((response: Blob) => { 
+      const blob = new Blob([response], { type: 'application/vnd.ms-excel' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'mascotas.xlsx'; 
+      a.click();
+     
+      window.URL.revokeObjectURL(url);
     });
   }
 }

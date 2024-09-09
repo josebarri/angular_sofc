@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { FormsModule } from '@angular/forms';
 import {DashboardService} from '../../services/dashboard.service';
@@ -15,10 +15,16 @@ import swal from "sweetalert2";
   styleUrl: './eps-create.component.css'
 })
 export default class EpsCreateComponent implements OnInit{
+  @ViewChild('documentUpload') documentInputRef!: ElementRef;
   puntos: any[] = [];
   nombre: string = "";
   idbasemusical!: string;
   form!: FormGroup;
+  fileToUpload: any;
+  fileUrl: string = "";
+  fileName: string = "";
+  btnDocument: boolean = true;
+  adjunto: any = {};
 constructor(
   private dashboardService:DashboardService, private route: ActivatedRoute, public router: Router,
   private _formBuilder: FormBuilder
@@ -50,6 +56,10 @@ constructor(
     console.log('dueños', this.puntos);
     
     });
+  }
+  handleUploadDocumentClick() {
+    const documentElement = this.documentInputRef.nativeElement;
+    documentElement.click();
   }
   cancelar(){
     this.router.navigate(['dashboard/mascotas'])
@@ -97,4 +107,78 @@ constructor(
   }
 }
 
+
+sendExcel(){
+  if (!this.fileToUpload) {
+    return;
+  } 
+    const formData = new FormData();
+    formData.append('file',this.fileToUpload);
+   this.dashboardService.posIportExcel(formData).subscribe((resp) => {
+    if (resp.code == 200) {
+      swal.fire({
+        title: "Confirmación.",
+        text: "se registro de manera excitosa!",
+        buttonsStyling: false,
+        customClass: {
+          confirmButton: "btn btn-success",
+        },
+        icon: "success",
+      });
+      this.router.navigate(["dashboard/mascotas"]);
+    } else {
+      swal.fire({
+        title: "Error.",
+        text: resp.message,
+        buttonsStyling: false,
+        customClass: {
+          confirmButton: "btn btn-success",
+        },
+        icon: "error",
+      });
+    }
+   })
+
 }
+
+
+onFileSelected(event: any) {
+    
+  const file = event.target.files[0]; 
+  this.fileToUpload = file;
+  const fileName = file.name;
+  this.fileName = file.name;  
+  
+  const fileExtension = fileName.split('.').pop().toLowerCase();
+  
+  this.adjunto = {nombre: fileName, ext: fileExtension};
+  const reader = new FileReader();
+  reader.onload = (event: any) => {
+    const contenido = event.target.result;
+    this.fileUrl = contenido;
+  };
+  reader.readAsDataURL(file);
+ 
+  this.btnDocument = false;
+ 
+
+  if (fileExtension === 'pdf')
+  {
+    this.btnDocument = false;
+  }
+  if (fileExtension === 'xls' || fileExtension === 'xlsx')
+  {
+    this.btnDocument = false;
+  }
+console.log('esto es el archivo',this.fileToUpload);
+  
+}
+cleanFile(){
+  this.fileToUpload = null; 
+  this.adjunto = {};
+  this.btnDocument = true;
+  this.fileUrl = "";
+  if (this.documentInputRef) this.documentInputRef.nativeElement.value = null;
+}
+}
+

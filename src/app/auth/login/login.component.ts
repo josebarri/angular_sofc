@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { AppService } from '../../service/app.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -11,8 +12,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export default class LoginComponent {
-  constructor(private auth: AuthService, private router: Router) { }
+export default class LoginComponent implements OnInit {
+  constructor(private auth: AuthService,private appService: AppService , private router: Router) { }
   email: string = '';
   password: string = '';
   loginError:boolean = false;
@@ -79,7 +80,14 @@ export default class LoginComponent {
   //   });
   // }
 
-
+  ngOnInit(): void {
+    this.logout()
+    
+  
+ }
+ logout(){
+  this.appService.logout()
+}
   handleLogin() {
     console.log('email', this.email);
     console.log('password', this.password);

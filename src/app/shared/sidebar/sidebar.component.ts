@@ -12,8 +12,6 @@ import { AppService } from '../../service/app.service';
 export class SidebarComponent {
   constructor(private appService: AppService  ,private router: Router) {}
 
-logout(){
-  this.appService.logout()
-}
+
 
 }
