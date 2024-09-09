@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './auth.guard';
 
 export const routes: Routes = [
 
@@ -6,47 +7,57 @@ export const routes: Routes = [
     {
         path: 'dashboard',
         loadComponent: () => import('./dashboard/dashboard.component'),
+        canActivate:[authGuard],
         children:[
             {
                 path:'home',
-                loadComponent: () =>  import('./dashboard/pages/control-flow/control-flow.component')
+                loadComponent: () =>  import('./dashboard/pages/control-flow/control-flow.component'),
+                canActivate:[authGuard]
             },
             {
                 path:'mascotas',
-                loadComponent: () =>  import('./dashboard/pages/defer-options/defer-options.component')
+                loadComponent: () =>  import('./dashboard/pages/defer-options/defer-options.component'),
+                canActivate:[authGuard]
             },
             {
                 path:'pacientes',
-                loadComponent: () =>  import('./dashboard/pages/pacientes/pacientes.component')
+                loadComponent: () =>  import('./dashboard/pages/pacientes/pacientes.component'),
+                canActivate:[authGuard]
             },
             {
                 path:'paciente-create',
-                loadComponent: () =>  import('./dashboard/pages/paciente-create/paciente-create.component')
+                loadComponent: () =>  import('./dashboard/pages/paciente-create/paciente-create.component'),
+                canActivate:[authGuard]
             },
             {
                 path:'paciente/:id',
-                loadComponent: () =>  import('./dashboard/pages/edit-paciente/edit-paciente.component')
+                loadComponent: () =>  import('./dashboard/pages/edit-paciente/edit-paciente.component'),
+                canActivate:[authGuard]
             },
           
             {
                 path:'user',
                 
-                loadComponent: () =>  import('./dashboard/pages/user/user.component')
+                loadComponent: () =>  import('./dashboard/pages/user/user.component'),
+                canActivate:[authGuard]
             },
             {
                 path:'user-create',
                
-                loadComponent: () =>  import('./dashboard/pages/users/users.component')
+                loadComponent: () =>  import('./dashboard/pages/users/users.component'),
+                canActivate:[authGuard]
             },
             {
                 path:'user/:id',
                
-                loadComponent: () =>  import('./dashboard/pages/edit-user/edit-user.component')
+                loadComponent: () =>  import('./dashboard/pages/edit-user/edit-user.component'),
+                canActivate:[authGuard]
             },
             {
                 path:'mascotas/:id',
                
-                loadComponent: () =>  import('./dashboard/pages/edit-eps/edit-eps.component')
+                loadComponent: () =>  import('./dashboard/pages/edit-eps/edit-eps.component'),
+                canActivate:[authGuard]
             },
             
             
@@ -57,7 +68,8 @@ export const routes: Routes = [
             },
             {
                 path:'mascotas-create',
-                loadComponent: () =>  import('./dashboard/pages/eps-create/eps-create.component')
+                loadComponent: () =>  import('./dashboard/pages/eps-create/eps-create.component'),
+                canActivate:[authGuard]
             },
             
         ]
@@ -69,7 +81,7 @@ export const routes: Routes = [
      },
 {
     path: '',
-    redirectTo:'/login',
+    redirectTo:'/dashboard',
     pathMatch: 'full'
 }
 
