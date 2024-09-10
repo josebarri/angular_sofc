@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DashboardService {
+  private urlExportarP: string= 'http://localhost:1020/paciente/exportar-excel';
 private urlExportar: string= 'http://localhost:1020/mascota/exportar-excel';
 private urlImportar: string= 'http://localhost:1020/mascota/importar-excel';
 private urlMascota: string = 'http://localhost:1020/mascota';
@@ -57,7 +58,9 @@ private headers: HttpHeaders = new HttpHeaders({ Authorization: this.token });
   }
 
 
-
+  getExportarPacientes(): Observable<Blob> {
+    return this.http.get(`${this.urlExportarP}`, { responseType: 'blob' });
+  }
   getPaciente(): Observable<any> {
     return this.http.get<any>(`${this.urlPaciente}`).pipe(res=>res);
   }

@@ -18,7 +18,7 @@ export default class EpsCreateComponent implements OnInit{
   @ViewChild('documentUpload') documentInputRef!: ElementRef;
   puntos: any[] = [];
   nombre: string = "";
-  idbasemusical!: string;
+  idmasco: any;
   form!: FormGroup;
   fileToUpload: any;
   fileUrl: string = "";
@@ -82,6 +82,8 @@ constructor(
      }
      this.dashboardService.posMascotas(payload).subscribe((resp) => {
       if (resp.code == 200) {
+        this.idmasco= resp.data.id_mascota
+      this.registrarpaciente()
         swal.fire({
           title: "Confirmación.",
           text: "La mascota fue registrada de manera correcta!",
@@ -105,6 +107,26 @@ constructor(
       }
      })
   }
+}
+
+
+
+
+registrarpaciente(){
+  let payload ={
+    mascotaDto: {
+    id_mascota:this.idmasco
+    }
+  }
+  this.dashboardService.posPaciente(payload).subscribe((resp) => {
+    if (resp.code == 200) {
+     
+      console.log('se envio');
+      
+    } else {
+      console.log('no se envio');
+    }
+   })
 }
 
 

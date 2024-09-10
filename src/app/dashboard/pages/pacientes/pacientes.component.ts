@@ -67,11 +67,23 @@ export default class PacientesComponent implements OnInit {
         }
       });
     }
+    getPacientesExport() {
+      this.dashboardService.getExportarPacientes().subscribe((response: Blob) => { 
+        const blob = new Blob([response], { type: 'application/vnd.ms-excel' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'pacientes.xlsx'; 
+        a.click();
+       
+        window.URL.revokeObjectURL(url);
+      });
+    }
     
       getPacientes(){
         this.dashboardService.getPaciente().subscribe((resp) => {
           this.puntos= resp.data;
-        console.log('mis mascotas', this.puntos);
+        console.log('mis pacientes', this.puntos);
         
         });
       }
